@@ -21,7 +21,25 @@
 // data-test-id="Slider__Progress"
 // Time into Video: data-test-id="Time Time--progress"
 // Time Remaining: data-test-id="Time Time--remaining"
+function checkVisible(elm) {
+    var rect = elm.getBoundingClientRect();
+    var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+    return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+}
+
 chrome.browserAction.onClicked.addListener(function(tab) {
     // Insert conditions here for when to run the script
-    chrome.tabs.executeScript(null, {file: "content_script.js"});
+    console.log(tab.url);
+    if ((tab.url).includes('https://www.acast.com/')) {
+        chrome.tabs.executeScript(null, {file: "content_script.js"});
+        chrome.tabs.executeScript(null, {file: "auto_load.js"});
+    }
+});
+
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+    chrome.tabs.get(activeInfo.tabId, function (tab) {
+        if ((tab.url).includes('https://www.acast.com/')) {
+            chrome.tabs.executeScript(null, {file: "auto_load.js"});
+        }
+    })
 });

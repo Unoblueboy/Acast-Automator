@@ -3,10 +3,12 @@
     "description": "Enhances your experience on the Acast website",
     "version": "1.0",
     "permissions": [
-      "activeTab"
+      "activeTab",
+      "tabs",
+      "https://www.acast.com/*"
     ],
     "background": {
-      "scripts": ["background.js", "jquery-3.3.1.js"],
+      "scripts": ["jquery-3.3.1.js", "background.js"],
       "persistent": false
     },
     "browser_action": {
