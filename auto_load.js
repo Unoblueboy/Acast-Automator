@@ -38,9 +38,6 @@ function checkVisible( ele ) {
 
 var t = setInterval(function() {
     var buttons = document.getElementsByClassName("button-rounded");
-    if (buttons.length == 0) {
-        clearInterval(t);
-    }
     var button = null;
     for (i=0; i<buttons.length; i++) {
         cur_button=buttons[i];
@@ -49,9 +46,19 @@ var t = setInterval(function() {
             break;
         }
     }
-    var button = buttons[0];
+    if (button == null) {
+        clearInterval(t);
+        return;
+    }
 
     if (checkVisible(button)) {
         button.click();
     }
 }, 1000);
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if (request.alert == "stop") {
+            clearInterval(t);
+        }
+    });

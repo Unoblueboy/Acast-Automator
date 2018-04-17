@@ -21,6 +21,8 @@
 // data-test-id="Slider__Progress"
 // Time into Video: data-test-id="Time Time--progress"
 // Time Remaining: data-test-id="Time Time--remaining"
+var acastTabId = 0;
+
 function checkVisible(elm) {
     var rect = elm.getBoundingClientRect();
     var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
@@ -40,6 +42,9 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
     chrome.tabs.get(activeInfo.tabId, function (tab) {
         if ((tab.url).includes('https://www.acast.com/')) {
             chrome.tabs.executeScript(null, {file: "auto_load.js"});
+            acastTabId = tab.id;
+        } else {
+            chrome.tabs.sendMessage(acastTabId, {alert: "stop"});
         }
     })
 });
