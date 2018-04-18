@@ -48,3 +48,11 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
         }
     })
 });
+
+
+var player_regex = RegExp("https:\/\/www\.acast\.com\/.*?\/");
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+    if ((tab.url).match(player_regex)) {
+        return
+    }
+})
