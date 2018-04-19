@@ -7,11 +7,11 @@ console.log("hi there");
 
 var play_button = document.querySelector('[data-test-id="CoverImageOverlay__Button"]')
 play_button.addEventListener("click", function(){
-    console.log("ayy lmao")
+    // Wait for player to load and for all the elements to exist
+    // Get the full playback time
+    // get the current time
+    // If the current time is the last second go to next
+    // find out what the next podcast is
 })
 
-// Wait for player to load and for all the elements to exist
-// Get the full playback time
-// get the current time
-// If the current time is the last second go to next
-// find out what the next podcast is
+
